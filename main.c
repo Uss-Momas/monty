@@ -1,44 +1,116 @@
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <ctype.h>
 #include "monty.h"
-#include <sys/stat.h>
-#include <fcntl.h>
+char *line;
 
-/**
- * main - entry point of our program
- * @ac: the number of arguments
- * @argv: the array of arguments
- * Return: 0 success or EXIT_FAILURE
- */
-int main(int ac, char **argv)
+int main(int argc, char *argv[])
 {
-	int fd;
-	ssize_t nchars, r_bytes;
-	char *buffer;
+	FILE *stream;
+	size_t len = 0;
+	unsigned int line_number = 1;
+	ssize_t nread;
 
-	if (ac != 2)
+	line = NULL;
+
+	if (argc != 2) 
 	{
-		fprintf(stderr, "USAGE: monty file\n");
+		fprintf(stderr, "Usage: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 
-	fd = open(argv[1], O_RDONLY);
-
-	if (fd == -1)
+	stream = fopen(argv[1], "r");
+	if (stream == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 
-	nchars = count_chars(argv[1]);
-	buffer = malloc((sizeof(char) * nchars) + 1);
-	if (buffer == NULL)
-	{
-		fprintf(stderr, "Error: cannot allocate memory\n");
-		exit(EXIT_FAILURE);
+	while ((nread = getline(&line, &len, stream)) != -1) {
+		printf("length: %lu, line %u: %s", nread, line_number, line);
+		line_handling(line, line_number);
+		line_number++;
 	}
-	buffer[nchars] = '\0';
-	printf("Number of nchars: %lu\n", nchars);
-	r_bytes = read(fd, buffer, nchars);
-	if (r_bytes == -1)
-		exit(EXIT_FAILURE);
-	return (0);
+
+	free(line);
+	fclose(stream);
+	exit(EXIT_SUCCESS);
+}
+
+
+void printline(char *l)
+{
+	printf("Linha: %s", l);
+}
+
+void handle_instruction(char *l)
+{
+	char *token;
+	int i, flag = 0;
+	instruction_t operators [] = {
+		{"push", push},
+		{"pall", pall},
+		{NULL, NULL}
+	};
+
+	token = strtok(l, " ");
+	while (token != NULL)
+	{
+		printf("token: %s ",token);
+		for (i = 0; operators[i].opcode != NULL; i++)
+		{
+			if (strcmp(token, operators[i].opcode) == 0)
+			{
+				/*"Opcode is right!"*/
+				flag = 1;
+				break;
+			}
+			flag = 0;
+		}
+		if (flag == 1)
+		{
+			if (strcmp(operators[i].opcode, "push") == 0)
+			{
+				/*Push function to be executed*/
+				token = strtok(NULL, " ");
+				if (token == NULL)
+				{
+					fprintf(stderr, "L%d: usage: push integer\n", 0);
+					exit(EXIT_FAILURE);
+				}
+				/*if it's a digit than the usage: push int is right*/
+				if (isdigit(*token))
+				{
+					printf("Token %d Is digit.\n", atoi(token));
+					/*Push into the stack*/
+					break;
+				}
+				else
+				{
+					fprintf(stderr, "L%d: usage: push integer\n", 0);
+					exit(EXIT_FAILURE);
+				}
+				break;
+			}
+			else if(strcmp(operators[i].opcode, "pall") == 0)
+			{
+				printf("Pall function to be executed:\n");
+				break;
+			}
+		}
+		token = strtok(NULL, " ");
+	}
+	for (i = 0; operators[i].opcode != NULL; i++)
+	{
+	}
+}
+
+void push(stack_t **stack, unsigned int line_number)
+{
+}
+
+void pall(stack_t **stack, unsigned int line_number)
+{
 }

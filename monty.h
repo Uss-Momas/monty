@@ -1,10 +1,25 @@
 #ifndef _MONTY_H_
 #define _MONTY_H_
+
+/*declare libraries*/
 #include <string.h>
-#include <sys/types.h>
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
+#include <sys/types.h>
+
+/**
+ * struct value_s - struct that will hold each value of operations
+ * @value: the value
+ *
+ * Description: structure
+ */
+
+typedef struct value_s
+{
+	char *li;
+} linha;
+extern char *line;
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -35,4 +50,10 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+int count_chars(char *filename);
+void printline(char *l);
+void handle_instruction(char *l);
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
+void line_handling(char *l, unsigned int ln);
 #endif
