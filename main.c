@@ -30,7 +30,10 @@ int main(int argc, char *argv[])
 
 	while ((nread = getline(&line, &len, stream)) != -1) {
 		printf("length: %lu, line %u: %s", nread, line_number, line);
+		/*Handling the line instruction only*/
 		line_handling(line, line_number);
+		handle_instruction(line, line_number);
+		/*increase line number*/
 		line_number++;
 	}
 
@@ -43,68 +46,6 @@ int main(int argc, char *argv[])
 void printline(char *l)
 {
 	printf("Linha: %s", l);
-}
-
-void handle_instruction(char *l)
-{
-	char *token;
-	int i, flag = 0;
-	instruction_t operators [] = {
-		{"push", push},
-		{"pall", pall},
-		{NULL, NULL}
-	};
-
-	token = strtok(l, " ");
-	while (token != NULL)
-	{
-		printf("token: %s ",token);
-		for (i = 0; operators[i].opcode != NULL; i++)
-		{
-			if (strcmp(token, operators[i].opcode) == 0)
-			{
-				/*"Opcode is right!"*/
-				flag = 1;
-				break;
-			}
-			flag = 0;
-		}
-		if (flag == 1)
-		{
-			if (strcmp(operators[i].opcode, "push") == 0)
-			{
-				/*Push function to be executed*/
-				token = strtok(NULL, " ");
-				if (token == NULL)
-				{
-					fprintf(stderr, "L%d: usage: push integer\n", 0);
-					exit(EXIT_FAILURE);
-				}
-				/*if it's a digit than the usage: push int is right*/
-				if (isdigit(*token))
-				{
-					printf("Token %d Is digit.\n", atoi(token));
-					/*Push into the stack*/
-					break;
-				}
-				else
-				{
-					fprintf(stderr, "L%d: usage: push integer\n", 0);
-					exit(EXIT_FAILURE);
-				}
-				break;
-			}
-			else if(strcmp(operators[i].opcode, "pall") == 0)
-			{
-				printf("Pall function to be executed:\n");
-				break;
-			}
-		}
-		token = strtok(NULL, " ");
-	}
-	for (i = 0; operators[i].opcode != NULL; i++)
-	{
-	}
 }
 
 void push(stack_t **stack, unsigned int line_number)
