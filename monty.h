@@ -55,7 +55,8 @@ typedef struct instruction_s
 /*Defining the functions of the program*/
 int count_chars(char *filename);
 void printline(char *l);
-void handleline(char *l);
+void handle_instruction(char *l);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+void line_handling(char *l, unsigned int ln);
 #endif

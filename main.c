@@ -4,15 +4,14 @@
 #include <sys/types.h>
 #include <ctype.h>
 #include "monty.h"
-
 char *line;
 
 int main(int argc, char *argv[])
 {
 	FILE *stream;
 	size_t len = 0;
+	unsigned int line_number = 1;
 	ssize_t nread;
-	stack_t *head = NULL;
 
 	line = NULL;
 
@@ -30,9 +29,9 @@ int main(int argc, char *argv[])
 	}
 
 	while ((nread = getline(&line, &len, stream)) != -1) {
-		printf("Retrieved line of length %lu:\n", nread);
-		/*printline(line);*/
-		handleline(line);
+		printf("length: %lu, line %u: %s", nread, line_number, line);
+		line_handling(line, line_number);
+		line_number++;
 	}
 
 	free(line);
@@ -46,7 +45,7 @@ void printline(char *l)
 	printf("Linha: %s", l);
 }
 
-void handleline(char *l)
+void handle_instruction(char *l)
 {
 	char *token;
 	int i, flag = 0;
