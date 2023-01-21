@@ -10,11 +10,18 @@
  */
 void handle_instruction(stack_t **stack, char *ln, unsigned int line_number)
 {
-	char *token;
+	char *token, *cp_line;
 	int i;
 	instruction_t operators [] = {{"push", push}, {"pall", pall}, {NULL, NULL}};
 
-	token = strtok(ln, " ");
+	cp_line = malloc(sizeof(char) * strlen(ln));
+	if (cp_line == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	strcpy(cp_line, ln);
+	token = strtok(cp_line, " ");
 	for (i = 0; operators[i].opcode != NULL; i++)
 	{
 		if (strcmp(token, operators[i].opcode) == 0)
@@ -37,12 +44,8 @@ void handle_instruction(stack_t **stack, char *ln, unsigned int line_number)
 			}
 		}
 	}
-	for (i = 0; operators[i].opcode != NULL; i++)
-	{
-	}
+	free(cp_line);
 }
-
-
 
 
 /**
