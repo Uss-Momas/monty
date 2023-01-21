@@ -21,6 +21,11 @@ void push(stack_t **stack, unsigned int line_number)
 	strcpy(cp_line, line);
 	token = strtok(cp_line, " ");
 	token = strtok(NULL, " ");
+	if (token == NULL)
+	{
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 	push_syntax(token, line_number);
 	number = atoi(token);
 	addnode(stack, number);
