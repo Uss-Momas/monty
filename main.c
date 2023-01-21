@@ -48,6 +48,7 @@ int main(int argc, char *argv[])
 		line_number++;
 	}
 	/*pall(&stack, line_number);*/
+	free(stack);
 	free(line);
 	fclose(stream);
 	exit(EXIT_SUCCESS);

@@ -28,7 +28,7 @@ void execute_instruction(stack_t **stack, unsigned int line_number)
 	token[i] = '\0';
 	for (i = 0; operators[i].opcode != NULL; i++)
 	{
-		printf("token: %s\n", token);
+		/*printf("token: %s\n", token);*/
 		if (strcmp(token, operators[i].opcode) == 0)
 		{
 			operators[i].f(stack, line_number);
