@@ -10,7 +10,7 @@ void execute_instruction(stack_t **stack, unsigned int line_number)
 {
 	char *token, *cp_line;
 	int i;
-	instruction_t operators [] = {{"push", push}, {"pall", pall}, {"pint", pint}, {NULL, NULL}};
+	instruction_t operators [] = {{"push", push}, {"pall", pall}, {"pint", pint}, {"pop", pop}, {NULL, NULL}};
 
 
 	cp_line = malloc(sizeof(char) * strlen(line));
