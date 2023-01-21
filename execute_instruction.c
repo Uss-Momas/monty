@@ -34,5 +34,5 @@ void execute_instruction(stack_t **stack, unsigned int line_number)
 			break;
 		}
 	}
-	free(cp_line);
+	/*free(cp_line);*/
 }
