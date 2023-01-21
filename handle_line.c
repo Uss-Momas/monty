@@ -7,7 +7,7 @@
  */
 void line_handling(char *ln, unsigned int line_number)
 {
-	char *operation[] = {"push", "pall", NULL};
+	char *operation[] = {"push", "pall", "pint",NULL};
 	char *token, *cp_line;
 	int i, flag = 0;
 
