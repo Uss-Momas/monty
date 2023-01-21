@@ -8,19 +8,6 @@
 #include <sys/types.h>
 
 /**
- * struct value_s - struct that will hold each value of operations
- * @value: the value
- *
- * Description: structure
- */
-
-typedef struct value_s
-{
-	char *li;
-} linha;
-extern char *line;
-
-/**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
  * @prev: points to the previous element of the stack (or queue)
@@ -51,11 +38,13 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+extern char *line;
+
 
 /*Defining the functions of the program*/
 int count_chars(char *filename);
 void printline(char *l);
-void handle_instruction(char *l, unsigned int line_number);
+void handle_instruction(stack_t **stack, char *l, unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void line_handling(char *l, unsigned int ln);
