@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 	size_t len = 0;
 	unsigned int line_number = 1;
 	ssize_t nread;
-	stack_t *head = NULL;
+	stack_t *stack = NULL;
 
 	line = NULL;
 
@@ -37,15 +37,17 @@ int main(int argc, char *argv[])
 
 	while ((nread = getline(&line, &len, stream)) != -1)
 	{
-		printf("length: %lu, line %u: %s", nread, line_number, line);
+	/*	printf("length: %lu, line %u: %s", nread, line_number, line);*/
 		/*Handling the line*/
 		line_handling(line, line_number);
 		/*Handling the instruction*/
-		handle_instruction(&head, line, line_number);
+/*		handle_instruction(&stack, line, line_number);*/
+		/**/
+		execute_instruction(&stack, line_number);
 		/*increase line number*/
 		line_number++;
 	}
-
+	/*pall(&stack, line_number);*/
 	free(line);
 	fclose(stream);
 	exit(EXIT_SUCCESS);
