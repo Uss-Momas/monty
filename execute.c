@@ -11,11 +11,8 @@ void execute_instruction(stack_t **stack, unsigned int line_number)
 	char *token, *cp_line;
 	int i;
 	instruction_t operators [] = {{"push", push}, {"pall", pall}, {"pint", pint}
-		, {"pop", pop}
-		, {"swap", swap}
-		, {"add", add}
-		, {"nop", nop}
-		, {NULL, NULL}
+		, {"pop", pop}, {"swap", swap}, {"add", add}, {"nop", nop}
+		, {"div", f_div}, {NULL, NULL}
 	};
 
 
