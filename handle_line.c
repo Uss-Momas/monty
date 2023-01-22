@@ -61,7 +61,7 @@ int verify_spaces(char *ln)
 
 	for (i = 0; i < (int)strlen(ln); i++)
 	{
-		if (!isspace(line[i]))
+		if (!isspace(ln[i]))
 		{
 			is_only_spaces = 0;
 			break;

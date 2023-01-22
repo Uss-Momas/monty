@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 		/*increase line number*/
 		line_number++;
 	}
-	free(stack);
+	free_stack(stack);
 	free(line);
 	fclose(stream);
 	exit(EXIT_SUCCESS);
