@@ -12,7 +12,7 @@ void execute_instruction(stack_t **stack, unsigned int line_number)
 	int i;
 	instruction_t operators [] = {{"push", push}, {"pall", pall}, {"pint", pint}
 		, {"pop", pop}, {"swap", swap}, {"add", add}, {"nop", nop}
-		, {"div", f_div}, {NULL, NULL}
+		, {"div", f_div}, {"mod", mod}, {NULL, NULL}
 	};
 
 
