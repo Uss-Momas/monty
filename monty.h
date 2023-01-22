@@ -1,6 +1,7 @@
 #ifndef _MONTY_H_
 #define _MONTY_H_
 
+
 /*declare libraries*/
 #include <string.h>
 #include <stdio.h>
@@ -41,11 +42,8 @@ extern char *line;
 
 
 /*Defining the functions of the program*/
-int count_chars(char *filename);
-void printline(char *l);
 void line_handling(char *l, unsigned int ln);
 int verify_spaces(char *l);
-void handle_instruction(stack_t **stack, char *l, unsigned int line_number);
 void push_syntax(char *token, unsigned int l_number);
 void execute_instruction(stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);

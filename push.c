@@ -19,8 +19,8 @@ void push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	strcpy(cp_line, line);
-	token = strtok(cp_line, " ");
-	token = strtok(NULL, " ");
+	token = strtok(cp_line, " \t");
+	token = strtok(NULL, " \t");
 	if (token == NULL)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);

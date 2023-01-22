@@ -37,17 +37,13 @@ int main(int argc, char *argv[])
 
 	while ((nread = getline(&line, &len, stream)) != -1)
 	{
-	/*	printf("length: %lu, line %u: %s", nread, line_number, line);*/
 		/*Handling the line*/
 		line_handling(line, line_number);
 		/*Handling the instruction*/
-/*		handle_instruction(&stack, line, line_number);*/
-		/**/
 		execute_instruction(&stack, line_number);
 		/*increase line number*/
 		line_number++;
 	}
-	/*pall(&stack, line_number);*/
 	free(stack);
 	free(line);
 	fclose(stream);

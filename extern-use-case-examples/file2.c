@@ -1,8 +1,6 @@
-#include "file3.h"
-#include "prog1.h"
-#include <stdio.h>
+#include "file0.h"
 
-void use_it(void)
+void init(void)
 {
-	printf("Global variable: %d\n", global_variable++);
+	line = "push 0";
 }

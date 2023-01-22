@@ -1,8 +1,7 @@
-#include "file3.h"
-#include "prog1.h" /*function declarations*/
+#include "file0.h"
+#include <stdio.h>
 
-/*variable defined here*/
-int increment(void)
+void print_it(void)
 {
-	return global_variable++;
+	printf("Linha: %s\n", line);
 }
