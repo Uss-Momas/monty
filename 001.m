@@ -1,4 +1,4 @@
-push
+	push
 push 112
 push 1212
 push 1231

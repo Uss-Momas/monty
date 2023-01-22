@@ -1,7 +1,9 @@
+	
+	push 12
 
-push da
-
-push asd
+push 13
 
 
-push as
+push 14
+	
+	pall

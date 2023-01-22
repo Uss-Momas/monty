@@ -28,7 +28,7 @@ void execute_instruction(stack_t **stack, unsigned int line_number)
 	/*copy the content of the line to the cp_line*/
 	/* Dest: cp_line, source: line*/
 	strcpy(cp_line, line);
-	token = strtok(cp_line, " ");
+	token = strtok(cp_line, " \t");
 	for (i = 0; token[i] != '\n'; i++)
 		;
 	token[i] = '\0';
