@@ -1,3 +1,4 @@
+
 			nop					
 		pall
 										push 12
@@ -7,4 +8,7 @@
 							add
 							push 30
 				nop
-										pall
+
+
+
+				pall
