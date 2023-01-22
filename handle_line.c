@@ -52,7 +52,7 @@ void line_handling(char *ln, unsigned int line_number)
 
 /**
  * verify_spaces - verifys if a line contain only spaces or not
- * @l: the line
+ * @ln: the line
  * Return: 1 if the line contains only spaces and 0 if not
  */
 int verify_spaces(char *ln)
