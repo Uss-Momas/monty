@@ -11,7 +11,7 @@ void line_handling(char *ln, unsigned int line_number)
 		, NULL
 	};
 	char *token, *cp_line;
-	int i, flag = 0;
+	int i, flag = 0, len = 0;
 
 	cp_line = malloc(sizeof(char) * strlen(ln));
 	if (cp_line == NULL)
@@ -21,6 +21,7 @@ void line_handling(char *ln, unsigned int line_number)
 	}
 	strcpy(cp_line, ln);
 	token = strtok(cp_line, " ");
+	/*printf("%s", token);*/
 	if (token != NULL)
 	{
 		for (i = 0; token[i] != '\n'; i++)
@@ -36,9 +37,15 @@ void line_handling(char *ln, unsigned int line_number)
 			}
 		}
 	}
+	else
+	{
+		flag = 1;
+	}
 	if (flag == 0)
 	{
-		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, ln);
+		len = strlen(cp_line);
+		cp_line[len - 1] = '\0';
+		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, cp_line);
 		free(cp_line);
 		exit(EXIT_FAILURE);
 	}
