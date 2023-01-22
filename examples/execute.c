@@ -1,12 +1,11 @@
 #include "monty.h"
-
 /**
  * execute_instruction - it executes the right instruction
  * @stack: the pointer to the stack
  * @line_number: the number of the line
  * Return: nothing
  */
-void execute_instruction(stack_t **stack, unsigned int line_number)
+void execute_instruction(stack_t **stack, unsigned int line_number, char *ln)
 {
 	char *token, *cp_line;
 	int i;
@@ -16,7 +15,7 @@ void execute_instruction(stack_t **stack, unsigned int line_number)
 	};
 
 
-	cp_line = malloc(sizeof(char) * strlen(line));
+	cp_line = malloc(sizeof(char) * strlen(ln));
 	if (cp_line == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
@@ -24,12 +23,12 @@ void execute_instruction(stack_t **stack, unsigned int line_number)
 	}
 	/*copy the content of the line to the cp_line*/
 	/* Dest: cp_line, source: line*/
-	strcpy(cp_line, line);
+	strcpy(cp_line, ln);
 	token = strtok(cp_line, " \t");
-	/*
+
 	for (i = 0; token[i] != '\n'; i++)
 		;
-	token[i] = '\0';*/
+	token[i] = '\0';
 	for (i = 0; operators[i].opcode != NULL; i++)
 	{
 		/*printf("token: %s\n", token);*/

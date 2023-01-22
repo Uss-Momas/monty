@@ -1,23 +1,34 @@
 #define _GNU_SOURCE
 #include "monty.h"
 #include <ctype.h>
+
+
+
+
+int main()
+{
+	line_handling(" \tpush 2131", 0);
+	line_handling("push", 0);
+	line_handling(" \t\t push 2131", 0);
+	line_handling("\t      push 2131", 0);
+	return (0);
+}
+
+
+
 /**
  * line_handling - handles the line instructions
  * @ln: the line
  * @line_number: the number of the line
  * Return: nothing or exit on failure
  */
-void line_handling(char *ln, stack_t **stack, unsigned int line_number)
+void line_handling(char *ln, unsigned int line_number)
 {
 	char *operation[] = {"push", "pall", "pint", "pop", "swap", "add", "nop"
 		, "div", "mod", "pchar", NULL
 	};
 	char *token, *cp_line, *saveptr;
 	int i, flag = 0, len = 0;
-	instruction_t operators [] = {{"push", push}, {"pall", pall}, {"pint", pint}
-		, {"pop", pop}, {"swap", swap}, {"add", add}, {"nop", nop}
-		, {"div", f_div}, {"mod", mod}, {"pchar", pchar}, {NULL, NULL}
-	};
 
 	cp_line = malloc(sizeof(char) * strlen(ln));
 	if (cp_line == NULL)
@@ -38,7 +49,6 @@ void line_handling(char *ln, stack_t **stack, unsigned int line_number)
 			if (strcmp(token, operation[i]) == 0)
 			{
 				flag = 1;
-				operators[i].f(stack, line_number);
 				free(cp_line);
 				break;
 			}
