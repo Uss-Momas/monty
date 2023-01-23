@@ -15,9 +15,10 @@ void push_syntax(char *token, unsigned int l_number)
 	token[i] = '\0';
 	for (i = 0; token[i] != '\0'; i++)
 	{
-		if (!isdigit(token[i]))
+		if (!isdigit(token[i]) && token[i] != '-')
 		{
 			fprintf(stderr, "L%u: usage: push integer\n", l_number);
+			free(line);
 			exit(EXIT_FAILURE);
 		}
 	}
