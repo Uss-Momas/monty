@@ -7,13 +7,17 @@
  * @line_number: the number of the line
  * Return: nothing or exit on failure
  */
-void line_handling(char *ln, unsigned int line_number)
+void line_handling(char *ln, stack_t **stack, unsigned int line_number, FILE *stream)
 {
 	char *operation[] = {"push", "pall", "pint", "pop", "swap", "add", "nop"
 		, "div", "mod", "pchar", NULL
 	};
 	char *token, *cp_line, *saveptr;
 	int i, flag = 0, len = 0;
+	instruction_t operators [] = {{"push", push}, {"pall", pall}, {"pint", pint}
+		, {"pop", pop}, {"swap", swap}, {"add", add}, {"nop", nop}
+		, {"div", f_div}, {"mod", mod}, {"pchar", pchar}, {NULL, NULL}
+	};
 
 	cp_line = malloc(sizeof(char) * strlen(ln));
 	if (cp_line == NULL)
@@ -36,6 +40,7 @@ void line_handling(char *ln, unsigned int line_number)
 			{
 				flag = 1;
 				free(cp_line);
+				operators[i].f(stack, line_number);
 				break;
 			}
 		}
@@ -46,6 +51,8 @@ void line_handling(char *ln, unsigned int line_number)
 		cp_line[len] = '\0';
 		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, cp_line);
 		free(cp_line);
+		free(line);
+		free(stream);
 		exit(EXIT_FAILURE);
 	}
 }

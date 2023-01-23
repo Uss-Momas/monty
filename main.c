@@ -38,9 +38,9 @@ int main(int argc, char *argv[])
 	while ((nread = getline(&line, &len, stream)) != -1)
 	{
 		/*Handling the line*/
-		line_handling(line, line_number);
+		line_handling(line, &stack, line_number, stream);
 		/*Handling the instruction*/
-		execute_instruction(&stack, line_number);
+		/*execute_instruction(&stack, line_number);*/
 		/*increase line number*/
 		line_number++;
 	}

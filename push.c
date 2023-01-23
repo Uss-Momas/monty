@@ -29,6 +29,7 @@ void push(stack_t **stack, unsigned int line_number)
 	push_syntax(token, line_number);
 	number = atoi(token);
 	addnode(stack, number);
+	free(cp_line);
 }
 
 
