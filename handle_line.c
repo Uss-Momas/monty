@@ -13,13 +13,13 @@ void line_handling(char *ln, stack_t **stack, unsigned int line_number
 		, FILE *stream)
 {
 	char *operation[] = {"push", "pall", "pint", "pop", "swap", "add", "nop"
-		, "div", "mod", "pchar", NULL
+		, "sub", "div", "mod", "pchar", NULL
 	};
 	char *token, *cp_line, *saveptr;
 	int i, flag = 0, len = 0;
 	instruction_t operators [] = {{"push", push}, {"pall", pall}
 		, {"pint", pint}, {"pop", pop}, {"swap", swap}, {"add", add}
-		, {"nop", nop}, {"div", f_div}, {"mod", mod}, {"pchar", pchar}
+		, {"nop", nop}, {"sub", sub}, {"div", f_div}, {"mod", mod}, {"pchar", pchar}
 		, {NULL, NULL}
 	};
 
