@@ -24,6 +24,7 @@ void push(stack_t **stack, unsigned int line_number)
 	if (token == NULL)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		free(line);
 		exit(EXIT_FAILURE);
 	}
 	push_syntax(token, line_number);
@@ -47,6 +48,7 @@ void addnode(stack_t **head, int n)
 	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
+		free(line);
 		exit(EXIT_FAILURE);
 	}
 

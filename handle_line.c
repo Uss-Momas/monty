@@ -54,6 +54,7 @@ void line_handling(char *ln, stack_t **stack, unsigned int line_number
 		len = strlen(cp_line);
 		cp_line[len] = '\0';
 		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, cp_line);
+		free_stack(*stack);
 		free(cp_line);
 		free(line);
 		fclose(stream);
