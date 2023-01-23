@@ -7,7 +7,7 @@
  * @line_number: the number of the line
  * Return: nothing or exit on failure
  */
-void line_handling(char *ln, stack_t **stack, unsigned int line_number)
+void line_handling(char *ln, stack_t **stack, unsigned int line_number, FILE *stream)
 {
 	char *operation[] = {"push", "pall", "pint", "pop", "swap", "add", "nop"
 		, "div", "mod", "pchar", NULL
@@ -38,18 +38,24 @@ void line_handling(char *ln, stack_t **stack, unsigned int line_number)
 			if (strcmp(token, operation[i]) == 0)
 			{
 				flag = 1;
-				operators[i].f(stack, line_number);
-				free(cp_line);
+				printf("found, operation: %s\n", operation[i]);
+				/*operators[i].f(stack, line_number);*/
+				/*free(cp_line);*/
 				break;
+				
 			}
 		}
 	}
+
 	if (flag == 0)
 	{
 		len = strlen(ln);
 		cp_line[len] = '\0';
 		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, cp_line);
 		free(cp_line);
+		free(line);
+		free_stack(*stack);
+		fclose(stream);
 		exit(EXIT_FAILURE);
 	}
 }
