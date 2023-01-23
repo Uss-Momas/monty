@@ -4,19 +4,23 @@
 /**
  * line_handling - handles the line instructions
  * @ln: the line
+ * @stack: the stack
  * @line_number: the number of the line
+ * @stream: the file to close
  * Return: nothing or exit on failure
  */
-void line_handling(char *ln, stack_t **stack, unsigned int line_number, FILE *stream)
+void line_handling(char *ln, stack_t **stack, unsigned int line_number
+		, FILE *stream)
 {
 	char *operation[] = {"push", "pall", "pint", "pop", "swap", "add", "nop"
 		, "div", "mod", "pchar", NULL
 	};
 	char *token, *cp_line, *saveptr;
 	int i, flag = 0, len = 0;
-	instruction_t operators [] = {{"push", push}, {"pall", pall}, {"pint", pint}
-		, {"pop", pop}, {"swap", swap}, {"add", add}, {"nop", nop}
-		, {"div", f_div}, {"mod", mod}, {"pchar", pchar}, {NULL, NULL}
+	instruction_t operators [] = {{"push", push}, {"pall", pall}
+		, {"pint", pint}, {"pop", pop}, {"swap", swap}, {"add", add}
+		, {"nop", nop}, {"div", f_div}, {"mod", mod}, {"pchar", pchar}
+		, {NULL, NULL}
 	};
 
 	cp_line = malloc(sizeof(char) * strlen(ln));
@@ -52,7 +56,7 @@ void line_handling(char *ln, stack_t **stack, unsigned int line_number, FILE *st
 		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, cp_line);
 		free(cp_line);
 		free(line);
-		free(stream);
+		fclose(stream);
 		exit(EXIT_FAILURE);
 	}
 }
