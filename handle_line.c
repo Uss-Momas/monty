@@ -73,6 +73,11 @@ int verify_spaces(char *ln)
 
 	for (i = 0; i < (int)strlen(ln); i++)
 	{
+		if (ln[i] == '#')
+		{
+			is_only_spaces = 1;
+			break;
+		}
 		if (!isspace(ln[i]))
 		{
 			is_only_spaces = 0;
