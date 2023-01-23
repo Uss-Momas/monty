@@ -35,6 +35,7 @@ void line_handling(char *ln, stack_t **stack, unsigned int line_number
 	flag = verify_spaces(ln);
 	if (token != NULL)
 	{
+		
 		for (i = 0; token[i] != '\n'; i++)
 			;
 		token[i] = '\0';
@@ -43,7 +44,6 @@ void line_handling(char *ln, stack_t **stack, unsigned int line_number
 			if (strcmp(token, operation[i]) == 0)
 			{
 				flag = 1;
-				free(cp_line);
 				operators[i].f(stack, line_number);
 				break;
 			}
@@ -60,6 +60,7 @@ void line_handling(char *ln, stack_t **stack, unsigned int line_number
 		fclose(stream);
 		exit(EXIT_FAILURE);
 	}
+	free(cp_line);
 }
 
 /**

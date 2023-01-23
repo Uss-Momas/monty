@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include "monty.h"
 
 /**
@@ -9,7 +10,7 @@
 
 void push(stack_t **stack, unsigned int line_number)
 {
-	char *cp_line, *token;
+	char *cp_line, *token, *saveptr;
 	int number;
 
 	cp_line = malloc(sizeof(char) * strlen(line));
@@ -19,11 +20,12 @@ void push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	strcpy(cp_line, line);
-	token = strtok(cp_line, " \t");
-	token = strtok(NULL, " \t");
+	token = strtok_r(cp_line, " \t", &saveptr);
+	token = strtok_r(NULL, " \t", &saveptr);
 	if (token == NULL)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		free(cp_line);
 		free(line);
 		exit(EXIT_FAILURE);
 	}
@@ -49,6 +51,7 @@ void addnode(stack_t **head, int n)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		free(line);
+		free(new_node);
 		exit(EXIT_FAILURE);
 	}
 
