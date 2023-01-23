@@ -35,7 +35,6 @@ void line_handling(char *ln, stack_t **stack, unsigned int line_number
 	flag = verify_spaces(ln);
 	if (token != NULL)
 	{
-		
 		for (i = 0; token[i] != '\n'; i++)
 			;
 		token[i] = '\0';
